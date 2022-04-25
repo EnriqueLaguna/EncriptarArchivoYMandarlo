@@ -3,6 +3,7 @@ import os
 from base64 import b64encode
 from Crypto.Cipher import ChaCha20
 from Crypto.Random import get_random_bytes
+import nacl.utils
 import json
 
 SEPARATOR = "<SEPARATOR>"
@@ -18,9 +19,8 @@ filename = "D:\ITESO\Semestre 8\SeguridadEnRedes\cripto\SendEncryptedFile/fileTo
 filesize = os.path.getsize(filename)
 print(f'fileSize: {filesize}')
 
-# Obtener la llave
-key = get_random_bytes(32)
-
+# Obtener la llave usando PyNaCl
+key = nacl.utils.random(32)
 # Usar ChaCha20 con la llave
 cipher = ChaCha20.new(key=key)
 
